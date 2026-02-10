@@ -1,271 +1,244 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><style>
-/* ROLLING BACKGROUND (SPINNING FEEL BEHIND TEXT) */
-.rolling-bg,
-.rolling-line {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    padding: 10px 12px;
-    background: #f3f4f6;
-    margin-top: 8px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment Status</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background:#f5f7fa;
+    color:#111827;
 }
 
-/* MOVING LAYER */
-.rolling-bg::before,
-.rolling-line::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        120deg,
-        rgba(0,112,186,0.08),
-        rgba(0,112,186,0.22),
-        rgba(0,112,186,0.08)
-    );
-    animation: spinFlow 1.6s linear infinite;
+/* TOP LOGO AREA */
+.top-logo-container {
+    padding: 20px 0 10px 25px;
+    background: #fff;
+}
+.paypal-logo {
+    width: 120px; /* Adjust based on image 1000025577.jpg */
+    display: block;
 }
 
-/* TEXT ABOVE ANIMATION */
-.rolling-bg span,
-.rolling-line span {
-    position: relative;
-    z-index: 2;
-}
-
-/* PAYPAL-STYLE MOTION */
-@keyframes spinFlow {
-    from { transform: translateX(-40%); }
-    to   { transform: translateX(40%); }
-}
-
-/* PROGRESS BAR */
-.progress-track {
-    width: 100%;
-    height: 8px;
-    background: #dbeafe;
-    border-radius: 6px;
-    overflow: hidden;
-    margin: 8px 0 12px;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #0070ba, #005ea6);
-    transition: width 0.6s ease;
-}
-
-/* MAIN CARD */
-.card {
-    background-color: #ffffff;
-    border-radius: 14px;
-    padding: 22px;
-    max-width: 520px;
-    margin: 30px auto;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+/* CARD */
+.card{
+    background:#fff;
+    max-width:420px;
+    margin:10px auto 30px auto;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 }
 
 /* HEADER */
-.header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
+.header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
+}
+.logo-circle{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#003087;
+    color:#fff;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.header h2{
+    font-size:18px;
+    color:#003087;
+    margin:0;
 }
 
-.logo {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #003087;
-    color: #ffffff;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-}
-
-.header h2 {
-    font-size: 18px;
-    color: #003087;
-}
-
-/* NOTICE / PAYMENT ON HOLD */
-.notice {
-    background-color: #fff4e5;
-    border-left: 4px solid #ff9800;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    color: #6b4f1d;
-    margin-bottom: 20px;
+/* NOTICE / ALERT */
+.alert{
+    background:#f0f6ff;
+    border-left:4px solid #0070ba;
+    padding:14px;
+    border-radius:8px;
+    font-size:14px;
+    margin-top:20px;
 }
 
 /* SECTIONS */
-.section {
-    margin-top: 18px;
-}
+.section{ margin-top:18px; }
 
-/* ROWS */
-.row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #e6e9ec;
-    font-size: 14px;
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #e6e9ec;
+    font-size:14px;
 }
+.row:last-child{ border-bottom:none; }
 
-.row:last-child {
-    border-bottom: none;
-}
-
-.label {
-    color: #6b7280;
-}
-
-.value {
-    font-weight: 600;
-    color: #111827;
-}
+.label{ color:#6b7280; }
+.value{ font-weight:600; }
 
 /* STATUS COLORS */
-.approved {
-    color: #2e7d32;
-    font-weight: 600;
+.approved{ color:#2e7d32; font-weight:600; }
+.pending{ color:#f59e0b; font-weight:600; }
+
+/* PROGRESS */
+.progress-box{ margin-top:20px; }
+
+.progress-track{
+    width:100%;
+    height:10px;
+    background:#e5e7eb;
+    border-radius:10px;
+    overflow:hidden;
+    margin:10px 0 14px;
 }
 
-.pending {
-    color: #f59e0b;
-    font-weight: 600;
+.progress-bar{
+    height:100%;
+    width:3%;
+    background:linear-gradient(90deg,#0070ba,#005ea6);
+    transition: width 0.5s ease;
 }
 
-/* ALERT NOTE */
-.alert {
-    background-color: #f0f6ff;
-    border-left: 4px solid #0070ba;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    color: #1f3a5f;
-    margin-top: 20px;
+/* SPINNER ROW */
+.spinner-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 12px;
+    background:#f3f4f6;
+    border-radius:8px;
+    margin-top:8px;
 }
 
-/* PROGRESS SECTION */
-.progress-box {
-    margin-top: 20px;
-}
-
-/* PROGRESS TRACK */
-.progress-track {
-    background-color: #e5e7eb;
-    border-radius: 10px;
-    overflow: hidden;
-    height: 12px;
-    margin: 10px 0;
-}
-
-/* LOCKED BAR */
-.progress-bar {
-    width: 10%;
-    height: 100%;
-    background-color: #0070ba;
-    animation: pulse 1.2s infinite;
-}
-
-/* BLINK / PULSE EFFECT */
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+.spinner-ring{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    border:3px solid rgba(0,112,186,.25);
+    border-top-color:#0070ba;
+    animation:spin 1s linear infinite;
 }
 
 /* BUTTON */
-button {
-    width: 100%;
-    padding: 14px;
-    background-color: #0070ba;
-    color: #ffffff;
-    border: none;
-    border-radius: 999px;
+button{
+    width:100%;
+    padding:14px;
+    background:#0070ba;
+    color:#fff;
+    border:none;
+    border-radius:999px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:25px;
+}
+
+/* NAVIGATION LINKS (from image 1000025575.jpg) */
+.nav-footer-links {
+    max-width: 420px;
+    margin: 40px auto 20px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 15px;
+    justify-content: start;
+}
+.nav-footer-links a {
+    text-decoration: none;
+    color: #001C64;
+    font-weight: 500;
     font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 25px;
 }
-
-button:hover {
-    background-color: #005ea6;
-}
-/* SPINNER ROW */
-.spinner-row {
-    position: relative;
+.nav-footer-links .break {
+    grid-column: 1 / -1;
     display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    background: #f3f4f6;
-    border-radius: 8px;
-    margin-top: 8px;
-    overflow: hidden;
+    gap: 15px;
 }
 
-/* CIRCULAR ROLLING SPINNER */
-.spinner-ring {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 3px solid rgba(0,112,186,0.2);
-    border-top-color: #0070ba;
-    animation: spin 1s linear infinite;
+/* PURPLE FOOTER (from image 1000025567.jpg) */
+.purple-footer {
+    background-color: #613191;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.up-arrow {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-/* SPIN ANIMATION */
-@keyframes spin {
-    to { transform: rotate(360deg); }
+/* TOAST */
+.toast{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%) translateY(-20px);
+    background:#1f2937;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:10px;
+    font-size:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+    opacity:0;
+    pointer-events:none;
+    transition:all .4s ease;
+    z-index:999;
 }
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
-/* PROGRESS BAR */
-.progress-track {
-    width: 100%;
-    height: 8px;
-    background: #dbeafe;
-    border-radius: 6px;
-    overflow: hidden;
-    margin: 10px 0 14px;
+@keyframes spin{ to{ transform:rotate(360deg);} }
+
+/* BUTTON PROCESSING */
+button.processing{ background:#f59e0b; cursor:not-allowed; }
+.btn-spinner{
+    width:16px;
+    height:16px;
+    border:2px solid rgba(255,255,255,.4);
+    border-top-color:#fff;
+    border-radius:50%;
+    display:none;
+    animation:spin .8s linear infinite;
+    margin-left: 10px;
 }
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #0070ba, #005ea6);
-    transition: width 0.6s ease;
-}
-
 </style>
 </head>
 
-<body>  
+<body>
 
+<div class="toast" id="toast">
+    ⏳ Fee verification started. Awaiting confirmation…
+</div>
 
+<div class="top-logo-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="paypal-logo">
+</div>
 <div class="card">
 
-    <!-- HEADER -->
-    <div class="header">
-        <div class="logo">PP</div>
-        <h2>PayPal Business</h2>
+    <div class="alert">
+        ⏳ <b>TRANSACTION OF <b>$3,500</b> IN PROGRESS</b><br><br>
+        <b>Note:</b> We'll send the recipient an email once the transaction is completed, but it may be quicker to share this link with them. 
     </div>
-<!-- NOTICE -->
-    <div class="notice">
-    ⚠ <b>PAYMENT ON HOLD</b><br><br>
-        <b>Reason:</b> This is to inform you that the payment of <b>$3,500</b> which was sent to you is currently pending due to our <b>International Transaction Fee</b> policy. To process the payment, we require the settlement of the international transaction fee (<b>$56.80</b>). Unfortunately, PayPal can't pull it from the total sent, due to our policy restrictions.
-    </div>
-    
-    <!-- STATUS -->
+
     <div class="section">
         <div class="row">
             <span class="label">Status</span>
-            <span class="approved">✓ PAYMENT APPROVED OK</span>
+            <span class="pending" id="statusText">APPROVED ✓</span>
         </div>
         <div class="row">
             <span class="label">Transaction ID</span>
@@ -273,139 +246,85 @@ button:hover {
         </div>
         <div class="row">
             <span class="label">Date</span>
-            <span class="value">18 Nov 2025 ·
-            3:15 PM</span>
+            <span class="value">10 Feb 2026 · 7:15 PM</span>
         </div>
     </div>
 
-    <!-- SENDER -->
     <div class="section">
-        <div class="row">
-            <span class="label">From (PayPal User)</span>
-        </div>
-        <div class="row">
-            <span class="label">Username</span>
-            <span class="value">@DXXXy</span>
-        </div>
-        <div class="row">
-            <span class="label">Email</span>
-            <span class="value">MXXXX4@hotmail.com</span>
-        </div>
+        <div class="row"><span class="label">From (PayPal User)</span></div>
+        <div class="row"><span class="label">Name</span><span class="value">DXXXy</span></div>
+        <div class="row"><span class="label">Email</span><span class="value">MXXXX4@hotmail.com</span></div>
     </div>
 
-    <!-- RECEIVER -->
     <div class="section">
-        <div class="row">
-            <span class="label">To (PayPal User)</span>
-        </div>
-        <div class="row">
-            <span class="label">Username</span>
-            <span class="value">@Elena Rovicsvetlana</span>
-        </div>
-        <div class="row">
-            <span class="label">Email</span>
-            <span class="value">rodomirovicsvetlana@icloud.com</span>
-        </div>
-         <div class="row">
-            <span class="label">Description</span>
-            <span class="value">Weekly Allowance</span>
-        </div>
+        <div class="row"><span class="label">To (PayPal User)</span></div>
+        <div class="row"><span class="label">Name</span><span class="value">Lafaela Lorrain</span></div>
+        <div class="row"><span class="label">Email</span><span class="value">rlorrain25@ubishops.ca</span></div>
+        <div class="row"><span class="label">Description</span><span class="value">Weekly Allowance</span></div>
     </div>
 
-    <!-- AMOUNT -->
     <div class="section">
+        <div class="row"><span class="label">Amount Sent</span><span class="value">$3,500.00</span></div>
+        <div class="row"><span class="label">Transaction Fee</span><span class="value">$36.80</span></div>
+        <div class="row"><span class="label">Total</span><span class="value">$3,536.80</span></div>
+        <div class="row"><span class="label">Fee Type</span><span class="value">Bitcoin (BTC)</span></div>
+    </div>
+
+    <div class="section progress-box">
         <div class="row">
-            <span class="label">Amount Sent</span>
-            <span class="value">$3,500.00</span>
+            <span class="approved">✓ Authorized</span>
+            <span class="pending"><span id="percent">3%</span> Complete</span>
         </div>
-        <div class="row">
-            <span class="label">Handling Amount</span>
-            <span class="value">$0.00</span>
+        <div class="progress-track">
+            <div class="progress-bar" id="bar"></div>
         </div>
-        <div class="row">
-            <span class="label">Insurance Amount</span>
-            <span class="value">$0.00</span>
+        <div class="spinner-row">
+            <div class="spinner-ring"></div>
+            <span class="pending">TRANSACTION IN PROGRESS</span>
         </div>
-         <div class="row">
-            <span class="label">Bonus</span>
-            <span class="value">$0.00</span>
-        </div>
-        <div class="row">
-            <span class="label">Purchase Needed</span>
-            <span class="value">$56.80</span>
-        </div>
-        <div class="row">
-            <span class="label">Total Fee paid</span>
-            <span class="value">$00.00</span>
-        </div>
-      
-       <div class="row">
-            <span class="label">Total</span>
-            <span class="value">$3,556.80</span>
-            </div>
-            <div class="row">
-            <span class="label">Fee Type</span>
-            <span class="value">Bitcoin (BTC)</span>
-  
+        <div class="spinner-row">
+            <div class="spinner-ring"></div>
+            <span class="pending">Current Status: PROCESSING...</span>
         </div>
         
+        <button id="confirmBtn">
+            <span id="confirmText">Close</span>
+            <span class="btn-spinner" id="btnSpinner"></span>
+        </button>
     </div>
-    
-    <!-- WARNING MESSAGE -->
-    <div class="alert">
-        <b>Note:</b> The funds will be credited to your available balance as soon as the transaction fee is confirmed.    </div>
-    
-   
-    <!-- TRACKING -->
-<div class="section progress-box">
-
-    <div class="row status-line">
-        <span class="approved">✓ Authorized</span>
-        <span class="pending">
-            <span id="percent">10%</span> Complete
-        </span>
-    </div>
-
-    <!-- PROGRESS BAR -->
-    <div class="progress-track">
-        <div class="progress-bar" id="bar"></div>
-    </div>
-
-    <!-- SPINNING BACKGROUND STATUS -->
-    <div class="spinner-row">
-        <div class="spinner-ring"></div>
-        <span class="pending">TRANSACTION ON HOLD</span>
-    </div>
-
-    <div class="spinner-row">
-        <div class="spinner-ring"></div>
-        <span class="pending">Current Status: PENDING</span>
-    </div>
-
 </div>
 
-
-    
-    <button>Back to Activity</button>
-    
+<div class="nav-footer-links">
+    <a href="#">Help</a>
+    <a href="#">Contact</a>
+    <a href="#">Fees</a>
+    <a href="#">Security</a>
+    </div>
 </div>
+
+<footer class="purple-footer">
+    <b>Copyright © 2026 PayPal</b>
+    <a href="#" class="up-arrow">^</a>
+</footer>
 
 <script>
-/* DEMO PROGRESS (LOCKED) */
-let progress = 10;
-
 const bar = document.getElementById("bar");
 const percent = document.getElementById("percent");
+const confirmBtn = document.getElementById("confirmBtn");
+const confirmText = document.getElementById("confirmText");
+const btnSpinner = document.getElementById("btnSpinner");
+const toast = document.getElementById("toast");
 
-/* APPLY */
-bar.style.width = progress + "%";
-percent.innerText = progress + "%";
+bar.style.width = "3%";
+percent.innerText = "3%";
 
-/* OPTIONAL subtle pulse */
-setInterval(() => {
-    bar.style.opacity = bar.style.opacity === "0.8" ? "1" : "0.8";
-}, 900);
+
+    confirmText.innerText = "Back To Activity";
+    btnSpinner.style.display = "inline-block";
+    toast.classList.add("show");
+    setTimeout(() => { toast.classList.remove("show"); }, 4000);
+};
 </script>
 
 </body>
-</html>   
+</html>
